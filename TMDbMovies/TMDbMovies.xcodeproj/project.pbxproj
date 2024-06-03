@@ -17,6 +17,8 @@
 		2FCC3B932C0DF6E400520C95 /* TMDbMoviesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCC3B922C0DF6E400520C95 /* TMDbMoviesTests.swift */; };
 		2FCC3B9D2C0DF6E400520C95 /* TMDbMoviesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCC3B9C2C0DF6E400520C95 /* TMDbMoviesUITests.swift */; };
 		2FCC3B9F2C0DF6E400520C95 /* TMDbMoviesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCC3B9E2C0DF6E400520C95 /* TMDbMoviesUITestsLaunchTests.swift */; };
+		8007C4422C0E08CB009F8ACC /* AppServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8007C4412C0E08CB009F8ACC /* AppServices.framework */; };
+		8007C4432C0E08CB009F8ACC /* AppServices.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8007C4412C0E08CB009F8ACC /* AppServices.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +38,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		8007C4442C0E08CB009F8ACC /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8007C4432C0E08CB009F8ACC /* AppServices.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		2FCC3B752C0DF6E100520C95 /* TMDbMovies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TMDbMovies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FCC3B782C0DF6E100520C95 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +67,8 @@
 		2FCC3B982C0DF6E400520C95 /* TMDbMoviesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TMDbMoviesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FCC3B9C2C0DF6E400520C95 /* TMDbMoviesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDbMoviesUITests.swift; sourceTree = "<group>"; };
 		2FCC3B9E2C0DF6E400520C95 /* TMDbMoviesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDbMoviesUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		8007C4412C0E08CB009F8ACC /* AppServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AppServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8007C46A2C0E0C3F009F8ACC /* AppHelpers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AppHelpers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8007C4422C0E08CB009F8ACC /* AppServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +104,7 @@
 				2FCC3B912C0DF6E400520C95 /* TMDbMoviesTests */,
 				2FCC3B9B2C0DF6E400520C95 /* TMDbMoviesUITests */,
 				2FCC3B762C0DF6E100520C95 /* Products */,
+				8007C4402C0E08CB009F8ACC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -130,6 +150,15 @@
 			path = TMDbMoviesUITests;
 			sourceTree = "<group>";
 		};
+		8007C4402C0E08CB009F8ACC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8007C46A2C0E0C3F009F8ACC /* AppHelpers.framework */,
+				8007C4412C0E08CB009F8ACC /* AppServices.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -140,6 +169,7 @@
 				2FCC3B712C0DF6E100520C95 /* Sources */,
 				2FCC3B722C0DF6E100520C95 /* Frameworks */,
 				2FCC3B732C0DF6E100520C95 /* Resources */,
+				8007C4442C0E08CB009F8ACC /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

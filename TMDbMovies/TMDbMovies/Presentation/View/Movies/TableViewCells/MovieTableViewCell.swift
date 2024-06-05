@@ -27,6 +27,9 @@ class MovieTableViewCell: UITableViewCell, CellConfigurable {
         super.awakeFromNib()
         setupUI()
     }
+    
+    /// A closure property representing an action to be executed when a movie is selected.
+    private var selcteMovieAction: (()->Void)?
 
     /// Sets the selected state of the cell, optionally animating the transition between states.
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -58,5 +61,11 @@ class MovieTableViewCell: UITableViewCell, CellConfigurable {
         movieReleaseDate.text = cellViewModel.releaseDate
         movieImageView.loadImage(from: cellViewModel.posterImageURLString,
                                  placeholder: cellViewModel.posterImagePlaceHolderName)
+        selcteMovieAction = cellViewModel.selcteMovieAction
+    }
+    
+    // MARK:  Actions
+    @IBAction private func selectMovieButtonTapped(_ sender: Any) {
+        selcteMovieAction?()
     }
 }

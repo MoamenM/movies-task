@@ -58,7 +58,7 @@ extension AppCoordinator: CoordinatorFinishDelegate {
         childCoordinators = childCoordinators.filter({ $0.type != childCoordinator.type })
 
         switch childCoordinator.type {
-        case .tab:
+        case .tab, .movies:
             navigationController.viewControllers.removeAll()
         default:
             break

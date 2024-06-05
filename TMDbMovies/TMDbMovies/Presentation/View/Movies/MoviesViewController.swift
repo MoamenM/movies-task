@@ -38,6 +38,7 @@ class MoviesViewController: UIViewController {
     
     
     // MARK: View lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()

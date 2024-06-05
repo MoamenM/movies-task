@@ -8,7 +8,7 @@
 import Foundation
 
 /// An enumeration representing possible errors that can occur during network requests.
-public enum NetworkRequestError: LocalizedError, Equatable {
+public enum AppError: LocalizedError, Equatable {
     
     /// Indicates a bad request.
     case badRequest

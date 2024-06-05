@@ -45,6 +45,9 @@ class MovieCellViewModel: CellViewModel {
     /// File name of the movie poster image.
     private var posterImage: String
     
+    /// A closure property representing an action to be executed when a movie is selected.
+    private (set) var selcteMovieAction: (()->Void)?
+    
     
     // MARK: Initialization
     
@@ -54,10 +57,11 @@ class MovieCellViewModel: CellViewModel {
     ///   - title: The title of the movie.
     ///   - releaseDate: The release date of the movie.
     ///   - posterImage: The file name of the movie poster image.
-    init(title: String?, releaseDate: String?, posterImage: String?) {
+    init(title: String?, releaseDate: String?, posterImage: String?, selcteMovieAction: (()->Void)?) {
         self.title = title ?? ""
         self.releaseDate = releaseDate ?? ""
         self.posterImage = posterImage ?? ""
+        self.selcteMovieAction = selcteMovieAction
     }
     
 }

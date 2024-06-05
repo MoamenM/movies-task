@@ -1,5 +1,5 @@
 //
-//  MoviesListUseCase.swift
+//  MoviesUseCase.swift
 //  TMDbMovies
 //
 //  Created by ELKHADRAGI Moamen on 04/06/2024.
@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 /// Protocol defining the requirements for a use case responsible for executing the fetch operation for movies.
-protocol MoviesListUseCaseInterface {
+protocol MoviesUseCaseInterface {
     
     /// Executes the fetch operation for movies asynchronously.
     ///
@@ -19,18 +19,18 @@ protocol MoviesListUseCaseInterface {
 }
 
 /// Use case responsible for executing the fetch operation for movies.
-class MoviesListUseCase: MoviesListUseCaseInterface {
+class MoviesUseCase: MoviesUseCaseInterface {
     
     /// The repository used for fetching movies.
-    private let repo: MoviesListRepositoryProtocol
+    private let repo: MoviesRepositoryProtocol
     
     /// Set of cancellables to manage subscriptions.
     private var cancellables = Set<AnyCancellable>()
     
-    /// Initializes a new instance of MoviesListUseCase with the provided repository.
+    /// Initializes a new instance of MoviesUseCase with the provided repository.
     ///
     /// - Parameter repo: The repository used for fetching movies.
-    public init(repo: MoviesListRepositoryProtocol) {
+    public init(repo: MoviesRepositoryProtocol) {
         self.repo = repo
     }
     

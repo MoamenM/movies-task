@@ -44,11 +44,11 @@ enum TabBarPage {
     func pageTitleValue() -> String {
         switch self {
         case .nowPlaying:
-            return "Now Playing"
+            return "Now Playing Movies"
         case .popular:
-            return "Popular"
+            return "Popular Movies"
         case .upcoming:
-            return "Upcoming"
+            return "Upcoming Movies"
         }
     }
     
@@ -79,7 +79,7 @@ protocol TabCoordinatorProtocol: Coordinator {
 
 
 /// Class representing a tab coordinator.
-class TabCoordinator: NSObject, Coordinator {
+class TabCoordinator: NSObject, TabCoordinatorProtocol {
     weak var finishDelegate: CoordinatorFinishDelegate?
         
     var childCoordinators: [Coordinator] = []
@@ -95,9 +95,6 @@ class TabCoordinator: NSObject, Coordinator {
     required init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController
         self.tabBarController = .init()
-        tabBarController.tabBar.tintColor = .orange
-        tabBarController.tabBar.unselectedItemTintColor = .gray
-        tabBarController.tabBar.backgroundColor = .black
     }
 
     /// Starts the tab coordinator.
@@ -117,7 +114,10 @@ class TabCoordinator: NSObject, Coordinator {
         tabBarController.setViewControllers(tabControllers, animated: true)
         tabBarController.selectedIndex = TabBarPage.nowPlaying.pageOrderNumber()
         tabBarController.tabBar.isTranslucent = false
-        
+        tabBarController.tabBar.tintColor = .orange
+        tabBarController.tabBar.unselectedItemTintColor = .gray
+        tabBarController.tabBar.backgroundColor = .black
+
         navigationController.viewControllers = [tabBarController]
     }
       
@@ -132,31 +132,24 @@ class TabCoordinator: NSObject, Coordinator {
         navController.tabBarItem = UITabBarItem(title: page.pageTitleValue(),
                                                 image: page.pageIcon(),
                                                 tag: page.pageOrderNumber())
-        
-        // Determine the API path based on the selected page
-        var path: String
-        var title: String
-        switch page {
-        case .nowPlaying:
-            path = "/3/movie/now_playing"
-            title = "Now Playing Movies"
-        case .popular:
-            path = "/3/movie/popular"
-            title = "Popular Movies"
-        case .upcoming:
-            path = "/3/movie/upcoming"
-            title = "Upcoming Movies"
-        }
-        
-        let repo = MoviesListRepository(path: path)
-        let useCase = MoviesListUseCase(repo: repo)
-        let viewModel = MoviesViewModel(title: title, useCase: useCase)
-        let moviesVC = MoviesViewController(with: viewModel)
-        navController.pushViewController(moviesVC, animated: true)
-        
+
+        showMoviesFlow(tabBarPageType: page, navController: navController)
         return navController
     }
-    
+
+    /// Initiates the movies flow navigation.
+    ///
+    /// - Parameters:
+    ///   - tabBarPageType: The type of TabBarPage to navigate to.
+    ///   - navController: The UINavigationController to present the movies flow.
+    func showMoviesFlow(tabBarPageType: TabBarPage, navController: UINavigationController) {
+        let moviesCoordinator = MoviesCoordinator(navController)
+        moviesCoordinator.finishDelegate = finishDelegate
+        moviesCoordinator.tabBarPageType = tabBarPageType
+        moviesCoordinator.start()
+        childCoordinators.append(moviesCoordinator)
+    }
+        
     /// Returns the currently selected tab page.
     /// - Returns: The currently selected tab page.
     func currentPage() -> TabBarPage? {

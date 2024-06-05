@@ -36,16 +36,28 @@
                         <color key="textColor" systemColor="systemGrayColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zSz-nf-BBB">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="98"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain"/>
+                        <connections>
+                            <action selector="selectMovieButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="buA-sL-Ihf"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="K8h-vp-M8f" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="56X-dY-unk"/>
                     <constraint firstItem="g1H-hN-qJ4" firstAttribute="leading" secondItem="NT5-4o-JP8" secondAttribute="leading" id="83S-eI-NU0"/>
+                    <constraint firstAttribute="bottom" secondItem="zSz-nf-BBB" secondAttribute="bottom" id="b5G-3F-fdD"/>
                     <constraint firstItem="K8h-vp-M8f" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="bFd-hE-bJA"/>
                     <constraint firstItem="g1H-hN-qJ4" firstAttribute="trailing" secondItem="NT5-4o-JP8" secondAttribute="trailing" id="bUn-8J-Vi5"/>
                     <constraint firstItem="NT5-4o-JP8" firstAttribute="leading" secondItem="K8h-vp-M8f" secondAttribute="trailing" constant="12" id="eK4-5v-urq"/>
                     <constraint firstAttribute="bottom" secondItem="K8h-vp-M8f" secondAttribute="bottom" constant="10" id="hHz-0P-KJb"/>
                     <constraint firstAttribute="trailing" secondItem="NT5-4o-JP8" secondAttribute="trailing" constant="10" id="iKt-oZ-NvV"/>
+                    <constraint firstAttribute="trailing" secondItem="zSz-nf-BBB" secondAttribute="trailing" id="iU8-D9-ZEV"/>
                     <constraint firstItem="g1H-hN-qJ4" firstAttribute="top" secondItem="NT5-4o-JP8" secondAttribute="bottom" constant="8" id="icZ-tx-Tze"/>
+                    <constraint firstItem="zSz-nf-BBB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="q4J-7S-EVq"/>
+                    <constraint firstItem="zSz-nf-BBB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="vQA-UZ-CgO"/>
                     <constraint firstItem="NT5-4o-JP8" firstAttribute="centerY" secondItem="K8h-vp-M8f" secondAttribute="centerY" constant="-20" id="xP1-ts-pXz"/>
                 </constraints>
             </tableViewCellContentView>

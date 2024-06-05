@@ -14,9 +14,10 @@ class MoviesViewModel {
     
     // MARK: Variables
     private (set) var title: String
-    private let useCase: MoviesListUseCaseInterface!
+    private let useCase: MoviesUseCaseInterface?
+    private let coordinator: MoviesCoordinatorProtocol?
     private (set) var viewState = PassthroughSubject<ViewState, Never>()
-    private var moviesSection: Section?
+    private (set) var moviesSection: Section?
     
     // Computed variables
     /// Computed property that returns the number of rows in the section.
@@ -33,9 +34,13 @@ class MoviesViewModel {
     /// - Parameters:
     ///   - title: The title displayed in the view associated with this view model.
     ///   - useCase: The use case responsible for fetching movies.
-    public init(title: String, useCase: MoviesListUseCaseInterface) {
+    ///   - coordinator: the coordinator for handle naviagtion .
+    public init(title: String,
+                useCase: MoviesUseCaseInterface?,
+                coordinator: MoviesCoordinatorProtocol?) {
         self.title = title
         self.useCase = useCase
+        self.coordinator = coordinator
     }
     
     
@@ -70,7 +75,7 @@ class MoviesViewModel {
             DispatchQueue.main.async { [weak self] in
                 self?.viewState.send(.showLoading)
             }
-            let result = try await useCase.executeFetchData()
+            let result = try await useCase?.executeFetchData()
             setupMovieCellViewModels(movies: result?.results)
             DispatchQueue.main.async { [weak self] in
                 self?.viewState.send(.hideLoading)
@@ -80,8 +85,8 @@ class MoviesViewModel {
         } catch let error  {
             DispatchQueue.main.async { [weak self] in
                 self?.viewState.send(.hideLoading)
-                let errorMessage = (error as? NetworkRequestError)?.localizedDescription
-                self?.notifyErrorState(message: errorMessage ?? "Sorry, Something went wrong")
+                let error = (error as? AppError) ?? .unknownError
+                self?.notifyErrorState(error: error)
             }
         }
     }
@@ -89,24 +94,30 @@ class MoviesViewModel {
     /// Sets up movie cell view models based on the provided movie data.
     ///
     /// - Parameter movies: An array of Movie objects representing the movies to be displayed.
-    private func setupMovieCellViewModels(movies: [Movie]?) {
-        guard let movies = movies else { return }
+    func setupMovieCellViewModels(movies: [Movie]?) {
+        guard let movies = movies else { 
+            notifyErrorState(error: .unknownError)
+            return
+        }
+    
         let movieVMs: [CellViewModel] = movies.map { movie in
             return MovieCellViewModel(title: movie.title,
                                       releaseDate: movie.releaseDate,
-                                      posterImage: movie.poster)
+                                      posterImage: movie.poster, selcteMovieAction: { [weak self] in
+                guard let self = self, let movieId = movie.id else { return }
+                coordinator?.didSelectedMovie(with: movieId)
+            })
         }
         moviesSection = Section(items: movieVMs)
     }
     
     /// Notify the error state with the provided error message.
     ///
-    /// - Parameter message: The error message to be displayed.
-    private func notifyErrorState(message: String) {
-        viewState.send(.showError(imageName: "ic_noMovies", message: message,
+    /// - Parameter error: The AppError  to be displayed.
+    func notifyErrorState(error: AppError) {
+        viewState.send(.showError(imageName: "ic_noMovies", message: error.localizedDescription,
                                   buttonTitle: "Try Again", buttonAction: { [weak self] in
             self?.getMovies()
         }))
     }
-    
 }

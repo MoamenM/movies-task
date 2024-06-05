@@ -46,7 +46,7 @@ public class EmptyView: UIView {
     
     // MARK: - Configuration
     
-    func configure(imageName: String?, message: String, buttonTitle: String?, buttonAction: (()->Void)?) {
+    public func configure(imageName: String?, message: String, buttonTitle: String?, buttonAction: (()->Void)?) {
         if let imageName = imageName {
             noDataImageView.image = UIImage(named: imageName)
         } else {

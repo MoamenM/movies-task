@@ -1,5 +1,5 @@
 //
-//  MoviesListRequest.swift
+//  MoviesRequest.swift
 //  TMDbMovies
 //
 //  Created by ELKHADRAGI Moamen on 04/06/2024.
@@ -9,7 +9,7 @@ import Foundation
 import AppServices
 
 /// Struct representing a request to fetch a list of movies.
-struct MoviesListRequest: Request {
+struct MoviesRequest: Request {
     
     /// The type of data returned by the request.
     typealias ReturnType = MoviesList

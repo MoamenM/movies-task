@@ -10,16 +10,16 @@ import Foundation
 import AppServices
 
 /// Protocol defining the requirements for a repository responsible for fetching a list of movies.
-protocol MoviesListRepositoryProtocol {
+protocol MoviesRepositoryProtocol {
     
     /// Fetches a list of movies and returns a publisher with the result.
     ///
     /// - Returns: A publisher emitting either a MoviesList or a NetworkRequestError.
-    func fetch() -> AnyPublisher<MoviesList, NetworkRequestError>
+    func fetch() -> AnyPublisher<MoviesList, AppError>
 }
 
 /// Repository responsible for fetching a list of movies.
-class MoviesListRepository: MoviesListRepositoryProtocol {
+class MoviesRepository: MoviesRepositoryProtocol {
     
     /// The network service used for making requests.
     private let clientService: NetworkService
@@ -27,7 +27,7 @@ class MoviesListRepository: MoviesListRepositoryProtocol {
     /// The API path for fetching movies.
     private let path: String
 
-    /// Initializes a new instance of MoviesListRepository with the provided API path.
+    /// Initializes a new instance of MoviesRepository with the provided API path.
     ///
     /// - Parameter path: The API path for fetching movies.
     init(path: String) {
@@ -38,8 +38,8 @@ class MoviesListRepository: MoviesListRepositoryProtocol {
     /// Fetches a list of movies from the server.
     ///
     /// - Returns: A publisher emitting either a MoviesList or a NetworkRequestError.
-    func fetch() -> AnyPublisher<MoviesList, NetworkRequestError> {
-        clientService.dispatch(MoviesListRequest(path: path))
+    func fetch() -> AnyPublisher<MoviesList, AppError> {
+        clientService.dispatch(MoviesRequest(path: path))
     }
     
 }

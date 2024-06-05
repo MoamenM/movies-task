@@ -58,6 +58,10 @@ Unit tests have been written to cover critical components and functionalities of
 | ![IMG_4555](https://github.com/MoamenM/movies-task/assets/11499145/4781a613-f0da-4fec-afd7-3cccd2a2e881) | ![IMG_4557](https://github.com/MoamenM/movies-task/assets/11499145/cb16aac2-d948-43bf-ba5b-3d25a524afff) | ![IMG_4556](https://github.com/MoamenM/movies-task/assets/11499145/63da03b4-6509-4ce6-864c-9f965ba368a5) |
 
 
+### App Empity State
+| Empity State |
+|----------|
+| ![IMG_4558](https://github.com/MoamenM/movies-task/assets/11499145/91163cce-952f-4547-8b1e-3e619ec55d37) |
 
 
 ## Thanks!

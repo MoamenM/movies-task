@@ -10,9 +10,6 @@ import Foundation
 /// An enumeration representing possible errors that can occur during network requests.
 public enum NetworkRequestError: LocalizedError, Equatable {
     
-    /// Indicates an invalid request.
-    case invalidRequest
-    
     /// Indicates a bad request.
     case badRequest
     
@@ -45,5 +42,18 @@ public enum NetworkRequestError: LocalizedError, Equatable {
     
     /// Indicates an unknown error occurred.
     case unknownError
+    
+    
+    /// Returns a custom error message for each error case.
+    public var localizedDescription: String {
+        switch self {
+        case .serverError:
+            return "Sorry, Server Error"
+        case .timeOut:
+            return "Sorry, Request Timed Out"
+        default:
+            return "Sorry, Something went wrong"
+        }
+    }
     
 }

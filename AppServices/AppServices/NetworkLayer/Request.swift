@@ -37,7 +37,7 @@ public protocol Request {
 public extension Request {
     
     var url: URL? {
-        return URL(string: Constants.basedURL + path)
+        return URL(string: NetworkConstants.basedURL + path)
     }
     
     /// Default implementation of the HTTP method, which is GET.
@@ -70,14 +70,6 @@ public extension Request {
             return nil
         }
         return httpBody
-    }
-    
-    /// Adds query items to the URL query string.
-    func addQueryItems(queryParams: [String: Any]?) -> [URLQueryItem]? {
-        guard let queryParams = queryParams else {
-            return nil
-        }
-        return queryParams.map({URLQueryItem(name: $0.key, value: "\($0.value)")})
     }
     
     /// Transforms an Request into a standard URL request

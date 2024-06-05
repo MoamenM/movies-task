@@ -128,12 +128,31 @@ class TabCoordinator: NSObject, Coordinator {
         let navController = UINavigationController()
         navController.setNavigationBarHidden(false, animated: false)
 
+        // Create a tab bar item for the page
         navController.tabBarItem = UITabBarItem(title: page.pageTitleValue(),
                                                 image: page.pageIcon(),
                                                 tag: page.pageOrderNumber())
         
-        let upcomingMoviesVC = MoviesViewController()
-        navController.pushViewController(upcomingMoviesVC, animated: true)
+        // Determine the API path based on the selected page
+        var path: String
+        var title: String
+        switch page {
+        case .nowPlaying:
+            path = "/3/movie/now_playing"
+            title = "Now Playing Movies"
+        case .popular:
+            path = "/3/movie/popular"
+            title = "Popular Movies"
+        case .upcoming:
+            path = "/3/movie/upcoming"
+            title = "Upcoming Movies"
+        }
+        
+        let repo = MoviesListRepository(path: path)
+        let useCase = MoviesListUseCase(repo: repo)
+        let viewModel = MoviesViewModel(title: title, useCase: useCase)
+        let moviesVC = MoviesViewController(with: viewModel)
+        navController.pushViewController(moviesVC, animated: true)
         
         return navController
     }

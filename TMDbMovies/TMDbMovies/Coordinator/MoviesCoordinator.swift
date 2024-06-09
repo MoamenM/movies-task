@@ -34,19 +34,9 @@ class MoviesCoordinator: NSObject, MoviesCoordinatorProtocol {
     func start() {
         // Determine the API path based on the selected page
         guard let tabBarPageType = tabBarPageType else { return }
-        var path: String
-        switch tabBarPageType {
-        case .nowPlaying:
-            path = "/3/movie/now_playing"
-        case .popular:
-            path = "/3/movie/popular"
-        case .upcoming:
-            path = "/3/movie/upcoming"
-        }
-        
-        let repo = MoviesRepository(path: path)
+        let repo = MoviesRepository(path: tabBarPageType.path, type: tabBarPageType.rawValue)
         let useCase = MoviesUseCase(repo: repo)
-        let viewModel = MoviesViewModel(title: tabBarPageType.pageTitleValue(),
+        let viewModel = MoviesViewModel(title: tabBarPageType.pageTitleValue,
                                         useCase: useCase, coordinator: self)
         let moviesVC = MoviesViewController(with: viewModel)
         navigationController.pushViewController(moviesVC, animated: true)

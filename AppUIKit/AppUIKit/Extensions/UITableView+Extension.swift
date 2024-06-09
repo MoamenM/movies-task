@@ -29,5 +29,4 @@ public extension UITableView {
     func removeBackgroundView() {
         backgroundView = nil
     }
-    
 }

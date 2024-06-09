@@ -33,9 +33,9 @@ final class MovieDetailsViewModelTests: XCTestCase {
     func testSetupMovieDetails() {
         
         // Given
-        let genres: [Genre] = [Genre(id: 878, name: "Science Fiction"),
-                               Genre(id: 28, name: "Action")]
-        let movie = Movie(id: 614933, title: "Atlas", poster: "/bcM2Tl5HlsvPBnL8DKP9Ie6vU4r", releaseDate: "2024-05-23", genres: genres, overview: "A brilliant counterterrorism analyst with a deep distrust of AI discovers it might be her only hope when a mission to capture a renegade robot goes awry.", runtime: 120)
+        let genres = ["Science Fiction", "Action"]
+        let movie = MovieEntity(id: 614933, title: "Atlas", poster: "/bcM2Tl5HlsvPBnL8DKP9Ie6vU4r", releaseDate: "2024-05-23", genreNames: genres, overview: "A brilliant counterterrorism analyst with a deep distrust of AI discovers it might be her only hope when a mission to capture a renegade robot goes awry.", runtime: 120)
+        
         
         
         // When

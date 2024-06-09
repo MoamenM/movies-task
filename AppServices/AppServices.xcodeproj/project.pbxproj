@@ -16,12 +16,12 @@
 		8007C4372C0DFFA6009F8ACC /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8007C4362C0DFFA6009F8ACC /* Request.swift */; };
 		8007C4392C0DFFD9009F8ACC /* ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8007C4382C0DFFD9009F8ACC /* ContentType.swift */; };
 		8007C43B2C0DFFEE009F8ACC /* HTTPHeaderField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8007C43A2C0DFFEE009F8ACC /* HTTPHeaderField.swift */; };
-		8007C43D2C0E0014009F8ACC /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8007C43C2C0E0014009F8ACC /* NetworkConstants.swift */; };
 		8007C43F2C0E010A009F8ACC /* NetworkDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8007C43E2C0E010A009F8ACC /* NetworkDispatcher.swift */; };
 		8007C46E2C0E4647009F8ACC /* Bundle+unitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8007C46D2C0E4647009F8ACC /* Bundle+unitTests.swift */; };
 		8007C4702C0E46AA009F8ACC /* stub.json in Resources */ = {isa = PBXBuildFile; fileRef = 8007C46F2C0E46AA009F8ACC /* stub.json */; };
 		8007C4742C0E83F4009F8ACC /* MockSamplesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8007C4732C0E83F4009F8ACC /* MockSamplesRequest.swift */; };
 		8007C4782C0E85D9009F8ACC /* MockSamplesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8007C4772C0E85D9009F8ACC /* MockSamplesModel.swift */; };
+		8007C51F2C132B59009F8ACC /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8007C51E2C132B59009F8ACC /* CoreDataHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,12 +45,12 @@
 		8007C4362C0DFFA6009F8ACC /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		8007C4382C0DFFD9009F8ACC /* ContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentType.swift; sourceTree = "<group>"; };
 		8007C43A2C0DFFEE009F8ACC /* HTTPHeaderField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeaderField.swift; sourceTree = "<group>"; };
-		8007C43C2C0E0014009F8ACC /* NetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
 		8007C43E2C0E010A009F8ACC /* NetworkDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDispatcher.swift; sourceTree = "<group>"; };
 		8007C46D2C0E4647009F8ACC /* Bundle+unitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+unitTests.swift"; sourceTree = "<group>"; };
 		8007C46F2C0E46AA009F8ACC /* stub.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = stub.json; sourceTree = "<group>"; };
 		8007C4732C0E83F4009F8ACC /* MockSamplesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSamplesRequest.swift; sourceTree = "<group>"; };
 		8007C4772C0E85D9009F8ACC /* MockSamplesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSamplesModel.swift; sourceTree = "<group>"; };
+		8007C51E2C132B59009F8ACC /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +95,7 @@
 			children = (
 				8007C41A2C0DFB8D009F8ACC /* AppServices.h */,
 				8007C42F2C0DFBA3009F8ACC /* NetworkLayer */,
+				8007C50D2C11C0FD009F8ACC /* DatabaseLayer */,
 			);
 			path = AppServices;
 			sourceTree = "<group>";
@@ -114,7 +115,6 @@
 		8007C42F2C0DFBA3009F8ACC /* NetworkLayer */ = {
 			isa = PBXGroup;
 			children = (
-				8007C43C2C0E0014009F8ACC /* NetworkConstants.swift */,
 				8007C4342C0DFF91009F8ACC /* HTTPMethod.swift */,
 				8007C4382C0DFFD9009F8ACC /* ContentType.swift */,
 				8007C43A2C0DFFEE009F8ACC /* HTTPHeaderField.swift */,
@@ -124,6 +124,14 @@
 				8007C4302C0DFC00009F8ACC /* APIClient.swift */,
 			);
 			path = NetworkLayer;
+			sourceTree = "<group>";
+		};
+		8007C50D2C11C0FD009F8ACC /* DatabaseLayer */ = {
+			isa = PBXGroup;
+			children = (
+				8007C51E2C132B59009F8ACC /* CoreDataHelper.swift */,
+			);
+			path = DatabaseLayer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -237,12 +245,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8007C51F2C132B59009F8ACC /* CoreDataHelper.swift in Sources */,
 				8007C43B2C0DFFEE009F8ACC /* HTTPHeaderField.swift in Sources */,
 				8007C4392C0DFFD9009F8ACC /* ContentType.swift in Sources */,
 				8007C4312C0DFC00009F8ACC /* APIClient.swift in Sources */,
 				8007C43F2C0E010A009F8ACC /* NetworkDispatcher.swift in Sources */,
 				8007C4372C0DFFA6009F8ACC /* Request.swift in Sources */,
-				8007C43D2C0E0014009F8ACC /* NetworkConstants.swift in Sources */,
 				8007C4332C0DFC1D009F8ACC /* AppError.swift in Sources */,
 				8007C4352C0DFF91009F8ACC /* HTTPMethod.swift in Sources */,
 			);

@@ -48,11 +48,13 @@ public enum AppError: LocalizedError, Equatable {
     public var localizedDescription: String {
         switch self {
         case .serverError:
-            return "Sorry, Server Error"
+            return "Sorry, Server Error."
         case .timeOut:
-            return "Sorry, Request Timed Out"
+            return "Sorry, Request Timed Out."
+        case .urlSessionFailed(let error):
+            return error.localizedDescription
         default:
-            return "Sorry, Something went wrong"
+            return "Sorry, Something went wrong."
         }
     }
     

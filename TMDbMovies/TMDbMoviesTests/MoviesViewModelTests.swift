@@ -33,12 +33,11 @@ final class MoviesViewModelTests: XCTestCase {
     func testsetupMovieCellViewModels() {
         
         // Given
-        let genres: [Genre] = [Genre(id: 878, name: "Science Fiction"),
-                               Genre(id: 28, name: "Action")]
+        let genres = ["Science Fiction", "Action"]
         
-        let atlasMovie = Movie(id: 614933, title: "Atlas", poster: "/bcM2Tl5HlsvPBnL8DKP9Ie6vU4r", releaseDate: "2024-05-23", genres: genres, overview: "A brilliant counterterrorism analyst with a deep distrust of AI discovers it might be her only hope when a mission to capture a renegade robot goes awry.", runtime: 120)
+        let atlasMovie = MovieEntity(id: 614933, title: "Atlas", poster: "/bcM2Tl5HlsvPBnL8DKP9Ie6vU4r", releaseDate: "2024-05-23", genreNames: genres, overview: "A brilliant counterterrorism analyst with a deep distrust of AI discovers it might be her only hope when a mission to capture a renegade robot goes awry.", runtime: 120)
         
-        let jokerMovie = Movie(id: 133792, title: "The Joker Is Wild", poster: "/brxoc8xjWRWGoRMGLy1NV59LeYF.jpg", releaseDate: "1957-09-26", genres: genres, overview: "Frank Sinatra stars in director Charles Vidor's 1957 film biography of nightclub entertainer Joe E. Lewis. The cast also includes Mitzi Gaynor, Jeanne Crain, Eddie Albert, Beverly Garland, Jackie Coogan, Harold Huber, Barry Kelley, Ted de Corsia, Ned Glass, Mary Treen and Sid Melton.", runtime: 190)
+        let jokerMovie = MovieEntity(id: 133792, title: "The Joker Is Wild", poster: "/brxoc8xjWRWGoRMGLy1NV59LeYF.jpg", releaseDate: "1957-09-26", genreNames: genres, overview: "Frank Sinatra stars in director Charles Vidor's 1957 film biography of nightclub entertainer Joe E. Lewis. The cast also includes Mitzi Gaynor, Jeanne Crain, Eddie Albert, Beverly Garland, Jackie Coogan, Harold Huber, Barry Kelley, Ted de Corsia, Ned Glass, Mary Treen and Sid Melton.", runtime: 190)
         
         
         // When

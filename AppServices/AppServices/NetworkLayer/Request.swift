@@ -10,9 +10,13 @@ import Foundation
 /// A protocol defining the structure of a network request.
 public protocol Request {
     
+    /// The base URL of the endpoints
+    var baseUrl: String { get }
+    
     /// The path of the endpoint to be appended to the base URL.
     var path: String { get }
     
+    /// The url of the endpoint
     var url: URL? { get }
     
     /// The HTTP method of the request.
@@ -37,7 +41,7 @@ public protocol Request {
 public extension Request {
     
     var url: URL? {
-        return URL(string: NetworkConstants.basedURL + path)
+        return URL(string: baseUrl + path)
     }
     
     /// Default implementation of the HTTP method, which is GET.
@@ -79,6 +83,7 @@ public extension Request {
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
         request.httpBody = requestBodyFrom(params: body)
+        request.cachePolicy = .reloadIgnoringLocalCacheData
         
         ///Set your Common Headers here
         ///Like: api secret key for authorization header

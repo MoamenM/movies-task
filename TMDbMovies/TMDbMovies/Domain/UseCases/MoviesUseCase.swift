@@ -15,7 +15,7 @@ protocol MoviesUseCaseInterface {
     ///
     /// - Returns: A MoviesList object representing the list of movies fetched.
     /// - Throws: An error if the fetch operation fails.
-    func executeFetchData() async throws -> MoviesList?
+    func executeFetchData() async throws -> [MovieEntity]?
 }
 
 /// Use case responsible for executing the fetch operation for movies.
@@ -38,18 +38,23 @@ class MoviesUseCase: MoviesUseCaseInterface {
     ///
     /// - Returns: A MoviesList object representing the list of movies fetched.
     /// - Throws: An error if the fetch operation fails.
-    public func executeFetchData() async throws -> MoviesList? {
+    public func executeFetchData() async throws -> [MovieEntity]? {
         return try await withCheckedThrowingContinuation { continuation in
             self.repo.fetch()
-                .sink { completion in
+                .sink { [weak self] completion in
                     switch completion {
                     case .finished:
                         break
                     case .failure(let error):
-                        continuation.resume(throwing: error)
+                        if let movies = self?.repo.fetchFromLocal(), !movies.isEmpty {
+                            continuation.resume(returning: movies.map({$0.toEntity()}))
+                        } else {
+                            continuation.resume(throwing: error)
+                        }
                     }
-                } receiveValue: { response in
-                    continuation.resume(returning: response)
+                } receiveValue: { [weak self] response in
+                    self?.repo.saveRemoteMovies(movies: response.results)
+                    continuation.resume(returning: response.toEntity().movies)
                 }
                 .store(in: &cancellables)
         }

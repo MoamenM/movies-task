@@ -76,7 +76,9 @@ class MoviesViewModel {
                 self?.viewState.send(.showLoading)
             }
             let result = try await useCase?.executeFetchData()
-            setupMovieCellViewModels(movies: result?.results)
+            setupMovieCellViewModels(movies: result)
+
+            
             DispatchQueue.main.async { [weak self] in
                 self?.viewState.send(.hideLoading)
                 self?.viewState.send(.dataLoaded)
@@ -94,11 +96,12 @@ class MoviesViewModel {
     /// Sets up movie cell view models based on the provided movie data.
     ///
     /// - Parameter movies: An array of Movie objects representing the movies to be displayed.
-    func setupMovieCellViewModels(movies: [Movie]?) {
-        guard let movies = movies else { 
+    func setupMovieCellViewModels(movies: [MovieEntity]?) {
+        guard let movies = movies else {
             notifyErrorState(error: .unknownError)
             return
         }
+        
     
         let movieVMs: [CellViewModel] = movies.map { movie in
             return MovieCellViewModel(title: movie.title,

@@ -8,7 +8,7 @@
 import UIKit
 
 /// Enum representing the pages available in the tab bar.
-enum TabBarPage {
+enum TabBarPage: String {
     case nowPlaying
     case popular
     case upcoming
@@ -29,7 +29,7 @@ enum TabBarPage {
     }
     
     /// Returns the order number of the tab page.
-    func pageOrderNumber() -> Int {
+    var pageOrderNumber: Int {
         switch self {
         case .nowPlaying:
             return 0
@@ -41,7 +41,7 @@ enum TabBarPage {
     }
     
     /// Returns the title value of the tab page.
-    func pageTitleValue() -> String {
+    var pageTitleValue: String {
         switch self {
         case .nowPlaying:
             return "Now Playing Movies"
@@ -53,7 +53,7 @@ enum TabBarPage {
     }
     
     /// Returns the icon of the tab page.
-    func pageIcon() -> UIImage? {
+    var pageIconName: UIImage? {
         switch self {
         case .nowPlaying:
             return UIImage(systemName: "play")
@@ -63,6 +63,20 @@ enum TabBarPage {
             return UIImage(systemName: "play.rectangle.on.rectangle")
         }
     }
+    
+    
+    /// Returns the remote path of the tab page.
+    var path: String {
+        switch self {
+        case .nowPlaying:
+            return "/3/movie/now_playing"
+        case .popular:
+            return  "/3/movie/popular"
+        case .upcoming:
+            return  "/3/movie/upcoming"
+        }
+    }
+    
 }
 
 
@@ -100,7 +114,7 @@ class TabCoordinator: NSObject, TabCoordinatorProtocol {
     /// Starts the tab coordinator.
     func start() {
         let pages: [TabBarPage] = [.upcoming, .popular, .nowPlaying]
-            .sorted(by: { $0.pageOrderNumber() < $1.pageOrderNumber() })
+            .sorted(by: { $0.pageOrderNumber < $1.pageOrderNumber })
         
         let controllers: [UINavigationController] = pages.map({ getTabController($0) })
         
@@ -112,7 +126,7 @@ class TabCoordinator: NSObject, TabCoordinatorProtocol {
     private func prepareTabBarController(withTabControllers tabControllers: [UIViewController]) {
         tabBarController.delegate = self
         tabBarController.setViewControllers(tabControllers, animated: true)
-        tabBarController.selectedIndex = TabBarPage.nowPlaying.pageOrderNumber()
+        tabBarController.selectedIndex = TabBarPage.nowPlaying.pageOrderNumber
         tabBarController.tabBar.isTranslucent = false
         tabBarController.tabBar.tintColor = .orange
         tabBarController.tabBar.unselectedItemTintColor = .gray
@@ -129,9 +143,9 @@ class TabCoordinator: NSObject, TabCoordinatorProtocol {
         navController.setNavigationBarHidden(false, animated: false)
 
         // Create a tab bar item for the page
-        navController.tabBarItem = UITabBarItem(title: page.pageTitleValue(),
-                                                image: page.pageIcon(),
-                                                tag: page.pageOrderNumber())
+        navController.tabBarItem = UITabBarItem(title: page.pageTitleValue,
+                                                image: page.pageIconName,
+                                                tag: page.pageOrderNumber)
 
         showMoviesFlow(tabBarPageType: page, navController: navController)
         return navController
@@ -159,7 +173,7 @@ class TabCoordinator: NSObject, TabCoordinatorProtocol {
     /// Selects the specified tab page.
     /// - Parameter page: The tab page to select.
     func selectPage(_ page: TabBarPage) {
-        tabBarController.selectedIndex = page.pageOrderNumber()
+        tabBarController.selectedIndex = page.pageOrderNumber
     }
     
     /// Sets the selected index of the tab bar.
@@ -167,7 +181,7 @@ class TabCoordinator: NSObject, TabCoordinatorProtocol {
     func setSelectedIndex(_ index: Int) {
         guard let page = TabBarPage(index: index) else { return }
         
-        tabBarController.selectedIndex = page.pageOrderNumber()
+        tabBarController.selectedIndex = page.pageOrderNumber
     }
 }
 

@@ -9,14 +9,6 @@ import Combine
 import Foundation
 import AppServices
 
-/// A protocol defining the interface for fetching movie details.
-protocol MovieDetailsRepositoryProtocol {
-    
-    /// Fetches movie details.
-    /// - Returns: A publisher emitting a single movie or a network request error.
-    func fetch() -> AnyPublisher<Movie, AppError>
-}
-
 /// A concrete implementation of `MovieDetailsRepositoryProtocol` responsible for fetching movie details.
 class MovieDetailsRepository: MovieDetailsRepositoryProtocol {
     

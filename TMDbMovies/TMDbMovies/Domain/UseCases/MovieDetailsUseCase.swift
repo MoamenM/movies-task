@@ -13,7 +13,7 @@ protocol MovieDetailsUseCaseInterface {
     
     /// Executes the asynchronous fetch operation to retrieve movie details.
     /// - Returns: A movie object if successful, or throws an error if an issue occurs during the operation.
-    func executeFetchData() async throws -> Movie?
+    func executeFetchData() async throws -> MovieEntity?
 }
 
 /// A concrete implementation of `MovieDetailsUseCaseInterface` responsible for coordinating the retrieval of movie details.
@@ -33,7 +33,7 @@ class MovieDetailsUseCase: MovieDetailsUseCaseInterface {
     
     /// Executes the asynchronous fetch operation to retrieve movie details.
     /// - Returns: A movie object if successful, or throws an error if an issue occurs during the operation.
-    func executeFetchData() async throws -> Movie? {
+    func executeFetchData() async throws -> MovieEntity? {
         return try await withCheckedThrowingContinuation { continuation in
             self.repo.fetch()
                 .sink { completion in
@@ -44,7 +44,7 @@ class MovieDetailsUseCase: MovieDetailsUseCaseInterface {
                         continuation.resume(throwing: error)
                     }
                 } receiveValue: { response in
-                    continuation.resume(returning: response)
+                    continuation.resume(returning: response.toEntity())
                 }
                 .store(in: &cancellables)
         }

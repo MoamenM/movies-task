@@ -81,14 +81,14 @@ class MovieDetailsViewModel {
      
      - Parameter movie: The movie object containing details.
      */
-    func setupMovieDetails(movie: Movie?) {
+    func setupMovieDetails(movie: MovieEntity?) {
         guard let movie = movie else {
             notifyErrorState(error: .unknownError)
             return
         }
         
         let posterImageURLString = Constants.serverImageBasedURL + (movie.poster ?? "")
-        let genreTitles = (movie.genres ?? []).map { $0.name ?? ""}.joined(separator: ", ")
+        let genreTitles = (movie.genreNames ?? []).joined(separator: ", ")
         let hours = (movie.runtime ?? 0) / 60
         let minutes = (movie.runtime ?? 0) % 60
         let formattedRunTime = String(format: "%02d:%02d", hours, minutes)

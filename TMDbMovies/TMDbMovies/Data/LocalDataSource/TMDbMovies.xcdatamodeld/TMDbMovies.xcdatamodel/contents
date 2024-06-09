@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22225" systemVersion="23B81" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="MovieObject" representedClassName="MovieObject" syncable="YES">
+        <attribute name="id" attributeType="String"/>
+        <attribute name="listType" attributeType="String"/>
+        <attribute name="poster" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="releaseDate" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="title" optional="YES" attributeType="String" defaultValueString=""/>
+    </entity>
+</model>

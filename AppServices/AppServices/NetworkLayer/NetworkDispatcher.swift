@@ -35,9 +35,9 @@ public struct NetworkDispatcher {
                 }
                 
                 if let stringData = String(data: data, encoding: .utf8) {
-                    print("Response Data: \(stringData)")
+                    debugPrint("Response Data: \(stringData)")
                 } else {
-                    print("Could not convert data to string")
+                    debugPrint("Could not convert data to string")
                 }
                 
                 // Return Response data

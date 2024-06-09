@@ -13,6 +13,12 @@ struct MoviesList: Codable {
     let results: [Movie]?
 }
 
+extension MoviesList: ToEntity {
+
+    func toEntity() -> MoviesListEntity {
+        return MoviesListEntity(movies: results?.map({$0.toEntity()}))
+    }
+}
 
 /// A struct representing a movie.
 struct Movie: Codable {
@@ -30,6 +36,16 @@ struct Movie: Codable {
         case releaseDate = "release_date"
         case poster = "poster_path"
     }
+    
+    init(id: Int, title: String?, poster: String?, releaseDate: String?) {
+        self.id = id
+        self.title = title
+        self.poster = poster
+        self.releaseDate = releaseDate
+        self.genres = []
+        self.overview = ""
+        self.runtime = 0
+    }
 }
 
 
@@ -43,3 +59,11 @@ struct Genre: Codable {
     }
 }
 
+extension Movie: ToEntity {
+
+    func toEntity() -> MovieEntity {
+        let genreNames = genres?.compactMap { $0.name}
+        return MovieEntity(id: id, title: title, poster: poster, releaseDate: releaseDate,
+                           genreNames: genreNames, overview: overview, runtime: runtime)
+    }
+}
